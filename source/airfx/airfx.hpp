@@ -12,7 +12,36 @@ class airfx : public object<TWrapper>
     std::vector<std::unique_ptr<attribute<number, threadsafe::no, limit::clamp>>> m_airfx_parameters{};
 
   public:
-    airfx(const atoms& args)
+    // Explicitly expose required methods from object_base/object to the wrapper
+    // Use void* to avoid header conflicts with Max's t_object in some contexts
+    void assign_instance(void* instance) {
+        object<TWrapper>::assign_instance(reinterpret_cast<c74::max::t_object*>(instance));
+    }
+
+    void postinitialize() {
+        object<TWrapper>::postinitialize();
+    }
+
+    void set_classname(const symbol s) {
+        object<TWrapper>::set_classname(s);
+    }
+
+    // signature expected by wrap_as_max_external_common
+    atoms try_call(const std::string& name, const atoms& args = {}) {
+        return object<TWrapper>::try_call(name, args);
+    }
+    
+    // Additional overload for the specific case in wrapper
+    atoms try_call(const std::string& name, void* arg) {
+        atoms as = { atom(arg) };
+        return object<TWrapper>::try_call(name, as);
+    }
+
+    bool is_ui_class() const {
+        return object<TWrapper>::is_ui_class();
+    }
+
+    airfx(const atoms& args) : object<TWrapper>()
     {
         auto attributes = this->attributes();
         if (attributes.empty()) {
@@ -54,7 +83,7 @@ class airfx : public object<TWrapper>
         this,
         "dspsetup",
         [this](const atoms& args, const int inlet) -> atoms {
-            m_wrapped->setSampleRate(samplerate());
+            m_wrapped->setSampleRate(this->samplerate());
             return {};
         }
     };
