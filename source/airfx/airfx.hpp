@@ -50,11 +50,13 @@ class airfx : public object<TWrapper>
     outlet<> out2{ this, "(signal) Output R", "signal" };
     outlet<> dump_out{ this, "Dump outlet" };
 
-    message<> m_dsp_setup{
+    message<> dspsetup{
         this,
         "dspsetup",
         [this](const atoms& args, const int inlet) -> atoms {
-            m_wrapped->setSampleRate(samplerate());
+            double sr = samplerate();
+            if (sr <= 0.0) sr = 44100.0;
+            m_wrapped->setSampleRate(sr);
             return {};
         }
     };

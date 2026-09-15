@@ -24,7 +24,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE
         "${CMAKE_CURRENT_LIST_DIR}/../../../airwindohhs/include/"
 )
 
-if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
     target_compile_definitions(${PROJECT_NAME} PRIVATE -DAIRFX_NO_DOC_GEN=1)
 endif ()
 

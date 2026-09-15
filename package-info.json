@@ -1,0 +1,23 @@
+{
+	"author" : "Isabel Kaspriskie",
+	"description" : "Max objects ported from the open source airwindows VST plugins.",
+	"homepatcher" : "",
+	"max_version_min" : "8.0", "max_version_max" : "none",
+	"name" : "airfx",
+	"os" : {
+		"macintosh" : {
+			"platform" : [ "x64", "aarch64" ],
+			"min_version" : "none"
+		},
+		"windows" : {
+			"platform" : [ "x64" ],
+			"min_version" : "none"
+		}
+	},
+	"package_extra" : {
+		"reverse_domain" : "com.isabelgk"
+	},
+	"tags" : [ "effects", "audio" ],
+	"version" : "2.0.0",
+	"website" : "http://www.github.com/isabelgk/airfx"
+}

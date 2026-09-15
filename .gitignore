@@ -1,22 +1,50 @@
-__*
-sysbuild
+# CMake / Build
+build/
+build_mac/
+build_win/
+out/
+sysbuild/
+.cache/
+cmake-build-*/
+CMakeSettings.json
 *.sdf
 *.suo
-*.sln
 *.opensdf
-log.txt
-externals
-extensions
-support
-build
-tests
+*.user
 *.o
-*.dylib
-tmp
+*.obj
+*.pdb
+*.idb
+
+# Output binaries
+# Ignore externals if they are purely build products,
+# but usually in Max projects the externals/ folder is the release target.
+# If you want to keep the repo clean of binaries, keep this ignored.
+externals/
+
+# Libraries / System
 .DS_Store
-.vs
-package-info.json
-.vscode
-.idea
-.cache
-cmake-build-*/
+Thumbs.db
+
+# IDE / Project settings (Personal)
+.vs/
+.vscode/
+.idea/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Project Specific Logs/Scratch
+log.txt
+build_output.txt
+*.log
+
+# Exceptions
+!package-info.json
